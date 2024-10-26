@@ -1,0 +1,60 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" href=" {%static 'style.css'%}">
+</head>
+<body>
+
+    {%include "inventoryapp/navbar.html"%}
+    <br><br>
+    <div class="container">
+        <form name=f1 method=post>{% csrf_token %}
+            <div class="row justify-content-end">
+                <div class="col-auto">
+                    <input type="text" class="form-control" placeholder="Search..." name="search_value" required>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="searchBearing">Search</button>
+                </div>
+            </div>
+        </form>
+        <br>
+        <table class="table table-striped table-bordered table-hover table-sm table-responsive">
+            <thead>
+                <tr>
+                <th scope="col">Bearing No</th>
+                <th scope="col">Description</th>
+                <th scope="col">Brand</th>
+                <th scope="col">MRP</th>
+                <th scope="col">Purchase Price</th>
+                <th scope="col">View More</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if products_list %}
+                {% for product in products_list %}
+                <tr>
+                        <th scope="row">{{ product.ProductID }}</td>
+                        <td>{{ product.ProductDesc }}</td>
+                        <td>{{ product.ProductBrand }}</td>
+                        <td>{{ product.ProductMRP }}</td>
+                        <td>{{ product.ProductPurchasePrice }}</td>
+                        <td><a href="{% url 'productsdesc' product.ProductSeq %}">Visit</a></td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                    <p>No Products are available.</p>
+                {% endif %}
+
+                {% block content %}
+                {% endblock %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

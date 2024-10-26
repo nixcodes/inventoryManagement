@@ -1,0 +1,29 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" href=" {%static 'style.css'%}">
+</head>
+
+<body>
+    <div>
+        <ul class="nav bg-info">
+            <li class="nav-item">
+                <a class="nav-link link-light" href="{% url 'productsview' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-light" href="{% url 'productscreate' %}">Create</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-light" href="{% url 'productsmodify' %}">Modify</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link-light" href="calculator">Calculator</a>
+            </li>
+        </ul>
+    </div>
+</body>
